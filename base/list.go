@@ -7,23 +7,37 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func ListNodeInit(val int) *ListNode {
-	return &ListNode{Val: val}
+func ListNodeInit(vals []int) *ListNode {
+	root := new(ListNode)
+	temp := root
+	for index, val := range vals {
+		temp.Val = val
+		if index < len(vals)-1 {
+			temp.Next = new(ListNode)
+			temp = temp.Next
+		}
+	}
+	return root
 }
 
-func (this *ListNode) Add(node *ListNode) {
-	temp := this
+func (listNode *ListNode) Add(val int) {
+	temp := listNode
 	for temp.Next != nil {
 		temp = temp.Next
 	}
-	temp.Next = node
+	temp.Next = &ListNode{
+		Val:  val,
+		Next: nil,
+	}
 }
 
-func (this *ListNode) Print() {
-	temp := this
+func (listNode *ListNode) Print() string {
+	res := ""
+	temp := listNode
 	for temp != nil {
-		fmt.Printf("%v->", temp.Val)
+		res += fmt.Sprintf("%v->", temp.Val)
 		temp = temp.Next
 	}
-	fmt.Println("NULL")
+	res += fmt.Sprintf("NULL")
+	return res
 }
