@@ -19,13 +19,13 @@ The characters in J are distinct.
 */
 
 func NumJewelsInStones(J string, S string) int {
-	jMap := make(map[rune]bool, len(J))
-	for _, j := range []rune(J) {
-		jMap[j] = true
+	jMap := make(map[rune]struct{}, len(J))
+	for _, j := range J {
+		jMap[j] = struct{}{}
 	}
 
 	var res = 0
-	for _, stone := range []rune(S) {
+	for _, stone := range S {
 		if _, ok := jMap[stone]; ok {
 			res++
 		}
